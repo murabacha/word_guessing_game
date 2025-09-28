@@ -10,6 +10,8 @@ letters = defaultdict(int)
 correct_letter = []
 for i in computer_input:
     letters[i] += 1
+
+print(letters)
 def evaluate(user_input):
     global attempt
     global temp_user_input
@@ -27,6 +29,7 @@ def evaluate(user_input):
         if user_input[i] in computer_input:
             
             if letters[user_input[i]] > 0:
+                print(letters[user_input[i]])
                 temp_user_input.insert(i,[user_input[i],'yellow'])
                 letters[user_input[i]] -= 1
             elif letters[user_input[i]] <= 0 :
@@ -42,6 +45,8 @@ while attempt < 7:
     user_input = input('enter your 5 letter word\n')
     user_input = user_input.upper()
     evaluate(user_input)
+    for i in computer_input:
+        letters[i] += 1
 
     print(user_inputs)
 print(correct_letter)

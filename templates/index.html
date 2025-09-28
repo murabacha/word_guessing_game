@@ -9,6 +9,7 @@
     <h1>remaining attempts: {{attempts}}</h1>
 </div>
 <style>
+    
     .header{
         display: flex;
         flex-direction: row;
@@ -26,16 +27,31 @@
     }
     .header a{
         margin: 10px;
-        font-size: 1.5em;
+        font-size: 1.7em;
         text-align: center;
         text-decoration: none;
-        color: darkgreen;
+        color: rgb(23, 233, 23);
         cursor: pointer;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: royalblue;
     }
     .header a:hover{
         color: red;
     }
+    @keyframes rotate {
+        from{
+            --rotate: 0deg;
+        }
+        to{
+            --rotate: 360deg;
+        }
+}
 </style>
+{% if computer_input%}
+    <p>{{computer_input}}</p>
+{%endif%}
+
     {%if form%}
     <form action="" method="post">
         {{form.hidden_tag()}}
@@ -58,7 +74,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: antiquewhite;
+            background-image: conical-gradient(antiquewhite,royalblue);
             padding: 10px;
             margin: 10px;
             border: 2px solid black;
@@ -94,23 +110,35 @@
             border: none;
             border-radius: 10px;
             padding: 10px;
-            background-color: rgb(30, 255, 0);
+            background-color: green;
             color: black;
             cursor: pointer;
         }
     </style>
     {%endif%}
     {% if answer%}
-        <h1>The Word was: {{answer}}</h1>
+        <h1>The Word was: <span class="answer">{{answer}}</span></h1>
     {%endif%}
     {%if message%}
-        <h1>{{message}}</h1>
+        <h1 class="h1s">{{message}}</h1>
     {%endif%}
     <style>
+        .answer{
+            font-size: 1em;
+            text-align: center;
+            color: red;
+        }
+
         h1{
             font-size: 2em;
             text-align: center;
             margin: 10px;
+        }
+        .h1s{
+            font-size: 1.5em;
+            text-align: center;
+            margin: 10px;
+            color: red;
         }
     </style>
     <table>
@@ -135,10 +163,9 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            background-color: antiquewhite;
+            background-color: rgb(246, 246, 246);
             padding: 10px;
             margin: 10px;
-            border: 2px solid black;
             border-radius: 10px;
         }
         .white{
