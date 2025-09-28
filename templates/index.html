@@ -1,0 +1,179 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="header">
+
+    <h1>Wordle word gessing game</h1>
+    {% if try_again %}
+        <a href="{{url_for('index',reset = 1)}}">Another game</a>
+    {%endif%}
+    <h1>remaining attempts: {{attempts}}</h1>
+</div>
+<style>
+    .header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: antiquewhite;
+        padding: 10px;
+        margin: 10px;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+    .header h1{
+        margin: 10px;
+        font-size: 2em;
+        text-align: center;
+    }
+    .header a{
+        margin: 10px;
+        font-size: 1.5em;
+        text-align: center;
+        text-decoration: none;
+        color: darkgreen;
+        cursor: pointer;
+    }
+    .header a:hover{
+        color: red;
+    }
+</style>
+    {%if form%}
+    <form action="" method="post">
+        {{form.hidden_tag()}}
+        {{form.text.label(class="form-label")}}
+        {%if form.text.errors%}
+
+            {{form.text(class="is-invalid")}}
+            {%for error in form.text.errors%}
+                <p>{{error}}</p>
+            {%endfor%}
+        {%else%}
+            {{form.text(class="form-control")}}
+        {%endif%}
+        <br>
+        {{form.submit(class ="btn")}}
+    </form>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: antiquewhite;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        form h1{
+            margin: 10px;
+            font-size: 2em;
+            text-align: center;
+        }
+        .form-label{
+            font-size: 1.3em;
+        }
+        .is-invalid{
+            border: 2px solid red;
+        }
+        .form-control{
+            font-size: 1em;
+            height: 30px;
+            width: 300px;
+            text-align: center;
+            margin: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .btn{
+            font-size: 1em;
+            height: 30px;
+            width: 300px;
+            text-align: center;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: rgb(30, 255, 0);
+            color: black;
+            cursor: pointer;
+        }
+    </style>
+    {%endif%}
+    {% if answer%}
+        <h1>The Word was: {{answer}}</h1>
+    {%endif%}
+    {%if message%}
+        <h1>{{message}}</h1>
+    {%endif%}
+    <style>
+        h1{
+            font-size: 2em;
+            text-align: center;
+            margin: 10px;
+        }
+    </style>
+    <table>
+
+    {%if user_inputs%}
+        {% set rows = user_inputs.values()%}
+            {%for row in rows%}
+                <tr>
+                    <td class="{{row[0][1]}}">{{row[0][0]}}</td>
+                    <td class="{{row[1][1]}}">{{row[1][0]}}</td>
+                    <td class="{{row[2][1]}}">{{row[2][0]}}</td>
+                    <td class="{{row[3][1]}}">{{row[3][0]}}</td>
+                    <td class="{{row[4][1]}}">{{row[4][0]}}</td>
+                </tr>
+            {%endfor%}
+    {%endif%}
+    </table>
+
+    <style>
+        table{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: antiquewhite;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        .white{
+            background-color: white;
+            font-size: 3em;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            margin: 10px;
+            border: 2px solid black;
+
+
+        }
+        .green{
+            background-color: green;
+            font-size: 3em;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            margin: 10px;
+            border: 2px solid black;
+
+
+        }
+        .yellow{
+            background-color: yellow;
+            font-size: 3em;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            margin: 10px;
+            border: 2px solid black;
+
+
+        }
+    </style>
+    
+{%endblock content%}
