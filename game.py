@@ -1,7 +1,7 @@
 from flask import Flask,render_template,request,session,url_for,redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField
-from wtforms.validators import DataRequired,Length
+from wtforms.validators import DataRequired,Length,Regexp
 from collections import defaultdict
 import random
 
@@ -36,7 +36,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 computer_input = random.choice(a_lot)
 class UserInputForm(FlaskForm):
-    text = StringField('enter your 5 letter word', validators=[DataRequired(), Length(min=5, max=5)])
+    text = StringField('enter your 5 letter word', validators=[DataRequired(), Length(min=5, max=5),
+                                                               Regexp("^[A-Za-z]+$", message="Letters only, no numbers or symbols!")])
     submit = SubmitField('Submit')
 
 @app.route('/', methods=['GET', 'POST'])
